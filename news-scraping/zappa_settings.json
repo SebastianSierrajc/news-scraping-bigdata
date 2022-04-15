@@ -9,6 +9,12 @@
         "keep_warm": false,
         "manage_roles": false,
         "aws_region": "us-east-1",
-        "s3_bucket": "zappa-news-scraping"
+        "s3_bucket": "zappa-news-scraping",
+        "events": [
+            {
+                "function": "scraping.handler",
+                "expression": "cron(0 10 * * ? *)"
+            }
+        ]
     }
 }
