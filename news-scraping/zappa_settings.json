@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "app_function": "scraping.handler",
+        "profile_name": null,
+        "project_name": "news-scraping",
+        "runtime": "python3.8",
+        "role_name": "LabRole",
+        "apigateway_enabled": false,
+        "keep_warm": false,
+        "manage_roles": false,
+        "aws_region": "us-east-1",
+        "s3_bucket": "zappa-news-scraping"
+    }
+}
