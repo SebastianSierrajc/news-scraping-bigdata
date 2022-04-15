@@ -14,7 +14,7 @@ def handler(event, context):
     date = to_date(trigger_date)
 
     try:
-        content = fetch_news_paper(BBC_PATH)
+        content = fetch_newspaper(BBC_PATH)
         file_path = set_path('BBC', date, 'BBC-HEADLINES.html')
         save_data(content, file_path)
     except:
@@ -22,14 +22,14 @@ def handler(event, context):
 
     
     try:
-        content = fetch_news_paper(CNN_PATH)
+        content = fetch_newspaper(CNN_PATH)
         file_path = set_path('CNN', date, 'CNN-HEADLINES.html')
         save_data(content, file_path)
     except:
         print('Error while scraping BBC headlines.')
 
 
-def fetch_news_paper(path: str) -> bytes:
+def fetch_newspaper(path: str) -> bytes:
     req = requests.get(path)
     if req.ok:
         return req.content
