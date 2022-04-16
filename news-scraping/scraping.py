@@ -17,6 +17,7 @@ def handler(event, context):
         content = fetch_newspaper(BBC_PATH)
         file_path = set_path('BBC', date, 'BBC-HEADLINES.html')
         save_data(content, file_path)
+        print("BBC Data saved")
     except:
         print('Error while scraping BBC headlines.')
 
@@ -25,6 +26,7 @@ def handler(event, context):
         content = fetch_newspaper(CNN_PATH)
         file_path = set_path('CNN', date, 'CNN-HEADLINES.html')
         save_data(content, file_path)
+        print("CNN Data saved")
     except:
         print('Error while scraping BBC headlines.')
 
@@ -54,5 +56,3 @@ def save_data(content: bytes, path) -> dict:
     s3 = boto3.resource('s3')
     s3Obj = s3.Object(BUCKET, path)
     return s3Obj.put(Body=content)
-
-

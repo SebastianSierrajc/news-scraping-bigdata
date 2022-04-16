@@ -13,7 +13,7 @@
         "events": [
             {
                 "function": "scraping.handler",
-                "expression": "cron(0 10 * * ? *)"
+                "expression": "cron(0 0 * * ? *)"
             }
         ]
     }
