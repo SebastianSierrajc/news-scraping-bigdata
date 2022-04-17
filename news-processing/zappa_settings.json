@@ -1,0 +1,35 @@
+{
+    "dev": {
+        "app_function": "processing.handler",
+        "profile_name": null,
+        "project_name": "news-processing",
+        "runtime": "python3.8",
+        "role_name": "LabRole",
+        "apigateway_enabled": false,
+        "keep_warm": false,
+        "manage_roles": false,
+        "aws_region": "us-east-1",
+        "s3_bucket": "zappa-news-processing",
+        "events": [
+            {
+                "function": "processing.handler",
+                "event_source": {
+                    "arn": "arn:aws:s3:::news-scraping-bucket",
+                    "key_filters": [
+                        {
+                            "type": "prefix",
+                            "value": "headlines/raw/"
+                        },
+                        {
+                            "type": "suffix",
+                            "value": ".html"
+                        }
+                    ],
+                    "events": [
+                        "s3:ObjectCreated:*"
+                    ]
+                }
+            }
+        ]
+    }
+}
