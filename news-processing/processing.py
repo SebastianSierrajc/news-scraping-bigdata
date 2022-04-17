@@ -3,12 +3,13 @@ import re
 import boto3
 import pandas
 import json
+from urllib.parse import unquote
 from bs4 import BeautifulSoup
 
 
 BBC_PATH = 'https://www.bbc.com'
 CNN_PATH = 'https://edition.cnn.com'
-DATE_FORMAT = '%Y-%m-%dT%H:%M:%SZ'
+DATE_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
 BUCKET = 'news-scraping-bucket'
 BUCKET_PATH = 'news/final'
 
@@ -19,6 +20,7 @@ def handler(event, context):
 
     try:
         key = event_data["s3"]["object"]["key"]
+        key = unquote(key)
         newspaper = set_newspaper(key)
         data = get_data(BUCKET, key)
         soup = soup_data(data)
