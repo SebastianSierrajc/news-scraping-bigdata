@@ -1,6 +1,5 @@
 import datetime
 import re
-from unicodedata import category
 import boto3
 import pandas
 import json
@@ -12,14 +11,14 @@ CNN_PATH = 'https://edition.cnn.com'
 DATE_FORMAT = '%Y-%m-%dT%H:%M:%SZ'
 BUCKET = 'news-scraping-bucket'
 BUCKET_PATH = 'news/final'
-KEY = 'headlines/raw/newspaper=CNN/year=2022/month=4/day=16/CNN-HEADLINES.html'
 
 def handler(event, context):
-    trigger_date = event['time']
+    event_data = event['Records'][0]
+    trigger_date = event_data['eventTime']
     date = to_date(trigger_date)
 
     try:
-        key = event["object"]["key"]
+        key = event_data["s3"]["object"]["key"]
         newspaper = set_newspaper(key)
         data = get_data(BUCKET, key)
         soup = soup_data(data)
